@@ -8,7 +8,7 @@ provider "aws"{
   }
   
 #-------- Data Section--------#
-
+/*
 data "aws_ami" "ami"{
 most_recent = true
 	owners      = ["self"]
@@ -17,7 +17,7 @@ most_recent = true
 		values = ["${var.ami_name]}"]
 	}
 }
-
+*/
 data "aws_security_group" "sg" {
   name = "${var.security_group_name}"
 }
@@ -25,8 +25,8 @@ data "aws_security_group" "sg" {
 #---------- EC2 resource-------#
 
 resource "aws_instance" "compute"{
-	ami = "${data.aws_ami.ami.id}"
-	instance_type = "${var.instance_type}"
+	ami = "ami-0eb094e431a3874cc"
+	instance_type = "t2.micro"
 	vpc_security_group_ids = ["${data.aws_security_group.sg.id}"]
 	associate_public_ip_address = true
 	tags{
